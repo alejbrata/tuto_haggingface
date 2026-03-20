@@ -2,3 +2,14 @@ transformers
 torch
 datasets
 accelerate
+diffusers
+gradio
+soundfile
+peft
+langchain
+langchain-huggingface
+langchain-community
+faiss-cpu
+smolagents
+Pillow
+langgraph

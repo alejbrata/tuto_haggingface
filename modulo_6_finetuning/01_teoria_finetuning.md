@@ -24,13 +24,14 @@ Para hacer Fine-Tuning usarás otra clase súper poderosa de la librería `trans
 3. **Usas la clase `Trainer`**, que es una configuración donde le dices cuántas veces quieres que el modelo lea los datos (épocas), qué tasa de aprendizaje (learning rate) usar, y le pasas el modelo + los datos.
 4. Ejecutas `trainer.train()`. Y después de unas horas (y una buena tarjeta gráfica GPU)... ¡tienes un modelo 100% hecho a tu medida!
 
-### Para el futuro...
-Cuando quieras subir al nivel "Maestro" y hacer tu propio Fine-Tuning sin gastar miles de euros en súper-ordenadores, busca sobre el término **PEFT y LoRA** dentro del ecosistema de Hugging Face. Es la técnica moderna para hacer esto con tu tarjeta de vídeo en casa.
+### Fine-Tuning tradicional vs Prompt Tuning
+
+En los últimos años, hacer fine-tuning a modelos completos (con billones de parámetros) se ha vuelto extremadamente costoso computacionalmente. Por eso han nacido las técnicas **PEFT** (Parameter-Efficient Fine-Tuning), y entre ellas destaca el **Prompt Tuning**.
+
+- **Fine-Tuning Completo:** Tomas todas las tuercas y engranajes del cerebro del modelo y las alteras. Requiere mucha memoria (múltiples GPUs gigantes).
+- **Prompt Tuning:** En lugar de tocar el cerebro original del modelo, añades una pequeña "capa" adicional o un grupo de "tokens virtuales" al principio del texto de entrada que el modelo aprende a ajustar. Es decir, el modelo original se queda intacto (congelado), y solo cambias el *prompt interno* matemático para guiar sus respuestas. Esto permite entrenar modelos enormes en tu portátil o con una tarjeta gráfica normal de escritorio.
+
+Cuando quieras explorar cómo hacer esto tú mismo en Hugging Face, busca la librería llamada **`peft`**, que permite hacer Prompt Tuning o LoRA sobre cualquier modelo de la biblioteca `transformers` de manera muy sencilla.
 
 ---
-**¡Felicidades!** Has terminado el curso en Hugging Face. Ahora tienes los conocimientos para:
-1. Usar Modelos directos con `pipeline`
-2. Encontrar modelos en el Hub
-3. Usar Tokenizers
-4. Trabajar con datasets
-5. Entender los conceptos de Fine-Tuning
+**¡Felicidades!** Has terminado el curso base en Hugging Face. Ahora conocerás las aplicaciones más llamativas en la **Fase 2 del curso** (Módulos 7, 8 y 9).
