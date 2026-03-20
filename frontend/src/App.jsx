@@ -140,7 +140,8 @@ function App() {
                           language="python" 
                           style={vscDarkPlus} 
                           showLineNumbers={true}
-                          wrapLongLines={true}
+                          wrapLines={true}
+                          lineProps={{ style: { display: "block" } }}
                           customStyle={{margin: 0, borderRadius: '6px', fontSize: '0.85rem', fontFamily: "'Fira Code', monospace"}}
                         >
                           {scriptCode ? String(scriptCode).replace(/\r\n/g, '\n') : ''}
