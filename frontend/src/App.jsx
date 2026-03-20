@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './App.css';
 
 // API_BASE dinámico para Producción en servidor VPS
@@ -133,10 +135,10 @@ function App() {
                   {scriptName ? (
                     <>
                       <div className="source-code-viewer" style={{marginBottom: "1rem", maxHeight: "300px", overflowY: "auto", background: "rgba(0,0,0,0.5)", padding: "1rem", borderRadius: "8px", border: "1px solid var(--border-glow)"}}>
-                        <h4 style={{marginTop: 0, color: "var(--accent-cyan)"}}>Código Fuente ({scriptName})</h4>
-                        <pre style={{margin: 0, whiteSpace: "pre-wrap", color: "#a6accd", fontFamily: "'Fira Code', monospace", fontSize: "0.85rem"}}>
-                          <code>{scriptCode}</code>
-                        </pre>
+                        <h4 style={{marginTop: 0, marginBottom: "0.5rem", color: "var(--accent-cyan)"}}>Código Fuente ({scriptName})</h4>
+                        <SyntaxHighlighter language="python" style={vscDarkPlus} customStyle={{margin: 0, borderRadius: '6px', fontSize: '0.85rem', fontFamily: "'Fira Code', monospace"}}>
+                          {scriptCode}
+                        </SyntaxHighlighter>
                       </div>
                       <div className="run-header">
                         <span>$ python {scriptName}</span>
