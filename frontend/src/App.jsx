@@ -136,8 +136,14 @@ function App() {
                     <>
                       <div className="source-code-viewer" style={{marginBottom: "1rem", maxHeight: "300px", overflowY: "auto", background: "rgba(0,0,0,0.5)", padding: "1rem", borderRadius: "8px", border: "1px solid var(--border-glow)"}}>
                         <h4 style={{marginTop: 0, marginBottom: "0.5rem", color: "var(--accent-cyan)"}}>Código Fuente ({scriptName})</h4>
-                        <SyntaxHighlighter language="python" style={vscDarkPlus} customStyle={{margin: 0, borderRadius: '6px', fontSize: '0.85rem', fontFamily: "'Fira Code', monospace"}}>
-                          {scriptCode}
+                        <SyntaxHighlighter 
+                          language="python" 
+                          style={vscDarkPlus} 
+                          showLineNumbers={true}
+                          wrapLines={true}
+                          customStyle={{margin: 0, borderRadius: '6px', fontSize: '0.85rem', fontFamily: "'Fira Code', monospace"}}
+                        >
+                          {scriptCode ? String(scriptCode).replace(/\r\n/g, '\n') : ''}
                         </SyntaxHighlighter>
                       </div>
                       <div className="run-header">
