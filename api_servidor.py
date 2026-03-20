@@ -54,7 +54,7 @@ def get_script_name(module_id: str):
         return {"filename": None, "source_code": None}
     
     with open(archivos_py[0], "r", encoding="utf-8") as f:
-        codigo = f.read()
+        codigo = f.read().replace("\r\n", "\n")
         
     return {"filename": archivos_py[0], "source_code": codigo}
 

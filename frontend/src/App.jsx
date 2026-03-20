@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import './App.css';
+
+SyntaxHighlighter.registerLanguage('python', python);
 
 // API_BASE dinámico para Producción en servidor VPS
 const API_BASE = window.location.hostname === 'localhost' 
@@ -138,13 +141,18 @@ function App() {
                         <h4 style={{marginTop: 0, marginBottom: "0.5rem", color: "var(--accent-cyan)"}}>Código Fuente ({scriptName})</h4>
                         <SyntaxHighlighter 
                           language="python" 
-                          style={vscDarkPlus} 
+                          style={atomOneDark} 
                           showLineNumbers={true}
-                          wrapLines={true}
-                          lineProps={{ style: { display: "block" } }}
-                          customStyle={{margin: 0, borderRadius: '6px', fontSize: '0.85rem', fontFamily: "'Fira Code', monospace"}}
+                          customStyle={{
+                            margin: 0, 
+                            padding: '1rem',
+                            borderRadius: '6px', 
+                            fontSize: '0.85rem', 
+                            fontFamily: "'Fira Code', monospace",
+                            lineHeight: '1.4'
+                          }}
                         >
-                          {scriptCode ? String(scriptCode).replace(/\r\n/g, '\n') : ''}
+                          {scriptCode}
                         </SyntaxHighlighter>
                       </div>
                       <div className="run-header">
