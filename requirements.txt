@@ -13,3 +13,6 @@ faiss-cpu
 smolagents
 Pillow
 langgraph
+fastapi
+uvicorn
+python-multipart
