@@ -3,7 +3,10 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 
-const API_BASE = 'http://localhost:8000/api';
+// API_BASE dinámico para Producción en servidor VPS
+const API_BASE = window.location.hostname === 'localhost' 
+  ? 'http://localhost:8000/api' 
+  : `http://${window.location.hostname}:8000/api`;
 
 function App() {
   const [modules, setModules] = useState([]);

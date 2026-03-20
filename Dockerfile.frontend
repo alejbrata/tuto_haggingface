@@ -1,0 +1,19 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copiamos archivos de dependencias
+COPY frontend/package.json frontend/package-lock.json* ./
+RUN npm install
+
+# Copiamos el código fuente de React
+COPY frontend/ .
+
+# Compilamos la aplicación de React y Vite para producción
+RUN npm run build
+
+# Usamos 'serve' para montar los archivos estáticos hiperrápidamente
+RUN npm install -g serve
+
+EXPOSE 5173
+CMD ["serve", "-s", "dist", "-l", "5173", "--listen", "tcp://0.0.0.0:5173"]

@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend-ia:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: huggingface-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Montamos la caché de Hugging Face en un volumen externo para no descargar
+      # los gigabytes de modelos cada vez que apagamos el contenedor.
+      - hf-cache:/root/.cache/huggingface
+    restart: unless-stopped
+
+  frontend-react:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: huggingface-ui
+    ports:
+      - "80:5173"  # Mapeamos el puerto 80 del VPS (tráfico web normal) al 5173 de React
+    depends_on:
+      - backend-ia
+    restart: unless-stopped
+
+volumes:
+  hf-cache:

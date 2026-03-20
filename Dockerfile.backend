@@ -1,0 +1,23 @@
+FROM python:3.10-slim
+
+# Para evitar problemas con ARM y librerías pre-compiladas
+RUN apt-get update && apt-get install -y build-essential libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copiamos el archivo de dependencias
+COPY requirements.txt .
+
+# Instalamos las librerías necesarias
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiamos el resto de los módulos de IA y el servidor
+COPY . .
+
+# Exponemos el puerto del backend para poder hablar desde la otra máquina
+EXPOSE 8000
+
+# Arrancamos Uvicorn escuchando al público (0.0.0.0)
+CMD ["uvicorn", "api_servidor:app", "--host", "0.0.0.0", "--port", "8000"]
