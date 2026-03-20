@@ -143,13 +143,14 @@ function App() {
                           language="python" 
                           style={atomOneDark} 
                           showLineNumbers={true}
+                          className="python-code-block"
                           customStyle={{
                             margin: 0, 
-                            padding: '1rem',
-                            borderRadius: '6px', 
+                            background: 'transparent',
+                            padding: '0.5rem',
                             fontSize: '0.85rem', 
                             fontFamily: "'Fira Code', monospace",
-                            lineHeight: '1.4'
+                            lineHeight: '1.5'
                           }}
                         >
                           {scriptCode}

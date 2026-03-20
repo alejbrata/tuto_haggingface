@@ -321,3 +321,40 @@ body {
   height: 64px;
   opacity: 0.5;
 }
+/* Fix for Source Code Viewer and Syntax Highlighter */
+.source-code-viewer {
+  display: block !important;
+  width: 100% !important;
+}
+
+.source-code-viewer pre {
+  display: block !important;
+  white-space: pre !important; 
+  word-break: normal !important;
+  word-wrap: normal !important;
+  overflow-x: auto !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.source-code-viewer code {
+  display: block !important;
+  white-space: pre !important;
+  background: transparent !important;
+  padding: 0 !important;
+  color: inherit !important;
+}
+
+/* Forcing React Syntax Highlighter internals */
+.source-code-viewer .react-syntax-highlighter-line-number {
+  display: inline-block !important;
+  min-width: 2.5em !important;
+  padding-right: 1em !important;
+  text-align: right !important;
+  user-select: none !important;
+  opacity: 0.5 !important;
+}
+
+.source-code-viewer > div > pre > code > span {
+  display: block !important; /* Forcing each line to be a block */
+}
