@@ -14,6 +14,7 @@ function App() {
   
   const [theoryContent, setTheoryContent] = useState('');
   const [scriptName, setScriptName] = useState('');
+  const [scriptCode, setScriptCode] = useState('');
   
   const [activeTab, setActiveTab] = useState('THEORY'); // THEORY or CONSOLE
   
@@ -46,8 +47,10 @@ function App() {
       const scriptRes = await axios.get(`${API_BASE}/modules/${mod.id}/script`);
       if (scriptRes.data.filename) {
         setScriptName(scriptRes.data.filename.replace(/\\/g, '/').split('/').pop());
+        setScriptCode(scriptRes.data.source_code);
       } else {
         setScriptName('');
+        setScriptCode('');
       }
     } catch (error) {
       console.error(error);
@@ -129,6 +132,12 @@ function App() {
                 <div className="terminal-container">
                   {scriptName ? (
                     <>
+                      <div className="source-code-viewer" style={{marginBottom: "1rem", maxHeight: "300px", overflowY: "auto", background: "rgba(0,0,0,0.5)", padding: "1rem", borderRadius: "8px", border: "1px solid var(--border-glow)"}}>
+                        <h4 style={{marginTop: 0, color: "var(--accent-cyan)"}}>Código Fuente ({scriptName})</h4>
+                        <pre style={{margin: 0, whiteSpace: "pre-wrap", color: "#a6accd", fontFamily: "'Fira Code', monospace", fontSize: "0.85rem"}}>
+                          <code>{scriptCode}</code>
+                        </pre>
+                      </div>
                       <div className="run-header">
                         <span>$ python {scriptName}</span>
                         <button 
