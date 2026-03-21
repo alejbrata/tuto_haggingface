@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -22,6 +22,18 @@ function App() {
   const [scriptCode, setScriptCode] = useState('');
   
   const [activeTab, setActiveTab] = useState('THEORY'); // THEORY or CONSOLE
+  
+  const consoleEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    consoleEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (activeTab === 'CONSOLE') {
+      scrollToBottom();
+    }
+  }, [consoleOutput, activeTab]);
   
   const [consoleOutput, setConsoleOutput] = useState('> Selecciona un módulo y presiona "Ejecutar Script"');
   const [isRunning, setIsRunning] = useState(false);
@@ -175,9 +187,24 @@ function App() {
                           )}
                         </button>
                       </div>
-                      <div className="console-output">
-                        {consoleOutput}
-                      </div>
+                      <div className="terminal-window">
+                  <div className="terminal-header-bar">
+                    <div className="terminal-header-dots">
+                      <div className="dot red"></div>
+                      <div className="dot yellow"></div>
+                      <div className="dot green"></div>
+                    </div>
+                    <div className="terminal-status">
+                      <span className="status-pulse"></span>
+                      {isRunning ? 'Ejecutando...' : 'Terminal Lista'}
+                    </div>
+                  </div>
+                  <div className="console-output">
+                    {consoleOutput || '> Listo para ejecutar código...'}
+                    <span className="cursor-blink"></span>
+                    <div ref={consoleEndRef} />
+                  </div>
+                </div>
                     </>
                   ) : (
                     <div className="empty-state">
