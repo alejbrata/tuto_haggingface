@@ -22,6 +22,8 @@ function App() {
   const [scriptCode, setScriptCode] = useState('');
   
   const [activeTab, setActiveTab] = useState('THEORY'); // THEORY or CONSOLE
+  const [consoleOutput, setConsoleOutput] = useState('> Selecciona un módulo y presiona "Ejecutar Script"');
+  const [isRunning, setIsRunning] = useState(false);
   
   const consoleEndRef = useRef(null);
 
@@ -34,9 +36,6 @@ function App() {
       scrollToBottom();
     }
   }, [consoleOutput, activeTab]);
-  
-  const [consoleOutput, setConsoleOutput] = useState('> Selecciona un módulo y presiona "Ejecutar Script"');
-  const [isRunning, setIsRunning] = useState(false);
 
   // Load modules on startup
   useEffect(() => {
